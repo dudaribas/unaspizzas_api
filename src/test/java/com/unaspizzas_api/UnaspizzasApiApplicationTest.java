@@ -1,10 +1,10 @@
-package com.unaspizzas;
+package com.unaspizzas_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ComandaDigitalApplicationTests {
+class UnaspizzasApiApplicationTest {
 
 	@Test
 	void contextLoads() {

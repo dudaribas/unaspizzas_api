@@ -1,16 +1,17 @@
-package com.unaspizzas.model;
+package com.unaspizzas_api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "dishes")
+@Table(name = "pizza")
 @Data
-public class Dish {
+public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_pizza")
+    private Long idPizza;
 
     private String name;
 
