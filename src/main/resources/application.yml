@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: UnasPizzas
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_unaspizzas
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  liquibase:
+    change-log: classpath:db/db.changelog-master.yml
