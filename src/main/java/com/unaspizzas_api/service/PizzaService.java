@@ -1,6 +1,6 @@
 package com.unaspizzas_api.service;
 
-import com.unaspizzas_api.model.Pizza;
+import com.unaspizzas_api.model.entity.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.unaspizzas_api.repository.PizzaRepository;

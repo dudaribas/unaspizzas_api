@@ -1,6 +1,6 @@
 package com.unaspizzas_api.controller;
 
-import com.unaspizzas_api.model.Pizza;
+import com.unaspizzas_api.model.entity.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

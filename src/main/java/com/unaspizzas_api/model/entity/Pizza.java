@@ -1,4 +1,4 @@
-package com.unaspizzas_api.model;
+package com.unaspizzas_api.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
