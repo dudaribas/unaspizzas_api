@@ -1,13 +1,13 @@
-package com.unaspizzas;
+package com.unaspizzas_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UnaspizzasApplication {
+public class UnaspizzasApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UnaspizzasApplication.class, args);
+		SpringApplication.run(UnaspizzasApiApplication.class, args);
 	}
 
 }
