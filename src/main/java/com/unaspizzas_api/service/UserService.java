@@ -1,5 +1,6 @@
 package com.unaspizzas_api.service;
 
+import com.unaspizzas_api.model.dto.LoginDTO;
 import com.unaspizzas_api.model.entity.User;
 import com.unaspizzas_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +15,10 @@ public class UserService {
     public User create(User user) {
         return userRepository.save(user);
     }
+
+    public User login(LoginDTO loginDTO) {
+       return userRepository.findUserByEmail(loginDTO.getEmail());
+    }
 }
+
+

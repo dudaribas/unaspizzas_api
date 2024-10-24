@@ -1,5 +1,6 @@
 package com.unaspizzas_api.controller;
 
+import com.unaspizzas_api.model.dto.LoginDTO;
 import com.unaspizzas_api.model.entity.User;
 import com.unaspizzas_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +18,10 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.create(user);
     }
+
+    @PostMapping("/login")
+    public User login(@RequestBody LoginDTO loginDTO) {
+        return userService.login(loginDTO);
+    }
+
 }
