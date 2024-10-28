@@ -5,10 +5,9 @@ import com.unaspizzas_api.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/order")
@@ -20,6 +19,11 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order orderRequest) {
         return new ResponseEntity<>(orderService.create(orderRequest), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user/{idUser}")
+    public ResponseEntity<List<Order>> getAllByUser(@PathVariable Long idUser) {
+        return new ResponseEntity<>(orderService.findAllByIdUser(idUser), HttpStatus.OK);
     }
 
 }
