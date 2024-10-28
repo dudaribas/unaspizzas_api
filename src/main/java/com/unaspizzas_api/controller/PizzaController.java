@@ -1,11 +1,14 @@
 package com.unaspizzas_api.controller;
 
+import com.unaspizzas_api.model.dto.PizzaDTO;
 import com.unaspizzas_api.model.entity.Pizza;
 import com.unaspizzas_api.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,14 +29,14 @@ public class PizzaController {
         return pizzaService.findById(id);
     }
 
-    @PostMapping
-    public Pizza createPizza(@RequestBody Pizza pizza) {
-        return pizzaService.create(pizza);
+    @PostMapping(consumes = "multipart/form-data")
+    public Pizza createPizza(@ModelAttribute PizzaDTO pizzaDTO, @RequestPart MultipartFile image) throws IOException {
+        return pizzaService.create(pizzaDTO, image);
     }
 
-    @PutMapping("/{id}")
-    public Pizza updatePizza(@PathVariable Long id, @RequestBody Pizza pizza) {
-        return pizzaService.update(id, pizza);
+    @PutMapping(value = "/{id}", consumes = "multipart/form-data")
+    public Pizza updatePizza(@PathVariable Long id, @ModelAttribute PizzaDTO pizzaDTO, @RequestPart MultipartFile image) throws IOException {
+        return pizzaService.update(id, pizzaDTO, image);
     }
 
     @DeleteMapping("/{id}")
