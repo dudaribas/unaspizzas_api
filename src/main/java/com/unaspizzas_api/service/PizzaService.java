@@ -3,11 +3,13 @@ package com.unaspizzas_api.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unaspizzas_api.model.dto.PizzaDTO;
 import com.unaspizzas_api.model.entity.Pizza;
+import com.unaspizzas_api.model.entity.PizzaCategory;
 import com.unaspizzas_api.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.DataInput;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
@@ -24,13 +26,23 @@ public class PizzaService {
         return pizzaRepository.findAll();
     }
 
+    public List<Pizza> findAll(Long idPizzaCategory) {
+        return pizzaRepository.findAllByCategoryIdPizzaCategory(idPizzaCategory);
+    }
+
     public Pizza findById(Long id) {
         return pizzaRepository.findById(id).orElseThrow(() -> new RuntimeException("Pizza not found"));
     }
 
     public Pizza create(PizzaDTO pizzaDTO, MultipartFile image) throws IOException {
-        Pizza pizza = mapper.convertValue(pizzaDTO, Pizza.class);
+        Pizza pizza = new Pizza();
+        PizzaCategory pizzaCategory = mapper.readValue(pizzaDTO.getCategory(), PizzaCategory.class);
         String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
+
+        pizza.setName(pizzaDTO.getName());
+        pizza.setDescription(pizzaDTO.getDescription());
+        pizza.setPrice(pizzaDTO.getPrice());
+        pizza.setCategory(pizzaCategory);
         pizza.setImage(imageBase64);
 
         return pizzaRepository.save(pizza);

@@ -18,10 +18,12 @@ public class Pizza {
     private Long idPizza;
 
     private String name;
-
     private String description;
-
     private Double price;
+
+    @OneToOne
+    @JoinColumn(name = "id_pizza_category")
+    private PizzaCategory category;
 
     @Lob
     private String image;

@@ -3,6 +3,7 @@ package com.unaspizzas_api.controller;
 import com.unaspizzas_api.model.dto.PizzaDTO;
 import com.unaspizzas_api.model.entity.Pizza;
 import com.unaspizzas_api.service.PizzaService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,12 @@ public class PizzaController {
     private PizzaService pizzaService;
 
     @GetMapping
-    public List<Pizza> getAllPizzas() {
+    public List<Pizza> getAllPizzas(@RequestParam(required = false) Long idPizzaCategory) {
+
+        if (idPizzaCategory != null) {
+            return pizzaService.findAll(idPizzaCategory);
+        }
+
         return pizzaService.findAll();
     }
 
