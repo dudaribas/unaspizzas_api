@@ -1,5 +1,6 @@
 package com.unaspizzas_api.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unaspizzas_api.model.dto.PizzaDTO;
 import com.unaspizzas_api.model.entity.Pizza;
@@ -17,10 +18,11 @@ import java.util.List;
 @Service
 public class PizzaService {
 
-    private final ObjectMapper mapper = new ObjectMapper();
-
     @Autowired
     private PizzaRepository pizzaRepository;
+
+    private final ObjectMapper mapper = new ObjectMapper();
+
 
     public List<Pizza> findAll() {
         return pizzaRepository.findAll();
@@ -35,14 +37,9 @@ public class PizzaService {
     }
 
     public Pizza create(PizzaDTO pizzaDTO, MultipartFile image) throws IOException {
-        Pizza pizza = new Pizza();
-        PizzaCategory pizzaCategory = mapper.readValue(pizzaDTO.getCategory(), PizzaCategory.class);
-        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
+        Pizza pizza = pizzaDTOToEntity(pizzaDTO);
 
-        pizza.setName(pizzaDTO.getName());
-        pizza.setDescription(pizzaDTO.getDescription());
-        pizza.setPrice(pizzaDTO.getPrice());
-        pizza.setCategory(pizzaCategory);
+        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
         pizza.setImage(imageBase64);
 
         return pizzaRepository.save(pizza);
@@ -56,12 +53,29 @@ public class PizzaService {
         pizza.setDescription(pizzaDTO.getDescription());
         pizza.setPrice(pizzaDTO.getPrice());
         pizza.setImage(imageBase64);
+        pizza.setCategory(categoryStringToPizzaCategory(pizzaDTO.getCategory()));
 
         return pizzaRepository.save(pizza);
     }
 
     public void delete(Long id) {
         pizzaRepository.deleteById(id);
+    }
+
+    private Pizza pizzaDTOToEntity(PizzaDTO pizzaDTO) throws JsonProcessingException {
+        Pizza pizza = new Pizza();
+        PizzaCategory pizzaCategory = categoryStringToPizzaCategory(pizzaDTO.getCategory());
+
+        pizza.setName(pizzaDTO.getName());
+        pizza.setDescription(pizzaDTO.getDescription());
+        pizza.setPrice(pizzaDTO.getPrice());
+        pizza.setCategory(pizzaCategory);
+
+        return pizza;
+    }
+
+    private PizzaCategory categoryStringToPizzaCategory(String category) throws JsonProcessingException {
+        return mapper.readValue(category, PizzaCategory.class);
     }
 
 }
