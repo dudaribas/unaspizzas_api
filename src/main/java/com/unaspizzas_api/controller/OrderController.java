@@ -26,4 +26,9 @@ public class OrderController {
         return new ResponseEntity<>(orderService.findAllByIdUser(idUser), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Order>> getAll() {
+        return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
+    }
+
 }

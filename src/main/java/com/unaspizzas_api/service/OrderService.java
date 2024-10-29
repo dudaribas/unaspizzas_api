@@ -18,6 +18,10 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
+
     public List<Order> findAllByIdUser(Long idUser) {
         return orderRepository.findAllByUserIdUser(idUser);
     }
