@@ -2,6 +2,7 @@ package com.unaspizzas_api.controller;
 
 import com.unaspizzas_api.model.dto.OrderDTO;
 import com.unaspizzas_api.model.entity.Order;
+import com.unaspizzas_api.model.entity.StatusOrder;
 import com.unaspizzas_api.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,11 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<Order>> getAll() {
         return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Order> updateStatus(@PathVariable Long id, @RequestBody StatusOrder statusOrder) {
+        return new ResponseEntity<>(orderService.updateStatus(id, statusOrder), HttpStatus.OK);
     }
 
 }
