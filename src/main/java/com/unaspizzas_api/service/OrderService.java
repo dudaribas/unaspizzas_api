@@ -4,6 +4,7 @@ package com.unaspizzas_api.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unaspizzas_api.model.dto.OrderDTO;
 import com.unaspizzas_api.model.entity.Order;
+import com.unaspizzas_api.model.entity.StatusOrder;
 import com.unaspizzas_api.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,16 @@ public class OrderService {
 
     private Order orderDTOToEntity(OrderDTO orderDTO) {
         return mapper.convertValue(orderDTO, Order.class);
+    }
+
+    public Order updateStatus(Long orderId, StatusOrder statusOrder) {
+
+        Order orderDB = orderRepository.findById(orderId).orElseThrow();
+
+        orderDB.setStatusOrder(statusOrder);
+        orderRepository.save(orderDB);
+
+        return orderDB;
     }
 
 }
