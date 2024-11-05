@@ -3,7 +3,10 @@ package com.unaspizzas_api.model.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,10 +35,12 @@ public class Order {
     @Column(name = "total_price")
     private Double totalPrice;
 
-    @Column(name = "created_at")
-    private Date createdAt;
+    @Column(name = "created_at", updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 }
