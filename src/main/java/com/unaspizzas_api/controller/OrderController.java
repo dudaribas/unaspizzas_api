@@ -31,7 +31,12 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAll() {
+    public ResponseEntity<List<Order>> getAll(@RequestParam(required = false) List<Long> idStatusOrder) {
+
+        if (idStatusOrder != null) {
+            return new ResponseEntity<>(orderService.findAll(idStatusOrder), HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
     }
 

@@ -27,6 +27,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> findAll(List<Long> idStatusOrder) {
+        return orderRepository.findAllByStatusOrderIdStatusOrderIn(idStatusOrder);
+    }
+
     public List<Order> findAllByIdUser(Long idUser) {
         return orderRepository.findAllByUserIdUser(idUser);
     }
