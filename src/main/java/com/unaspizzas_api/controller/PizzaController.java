@@ -45,7 +45,7 @@ public class PizzaController {
     }
 
     @PutMapping(value = "/{id}", consumes = "multipart/form-data")
-    public ResponseEntity<Pizza> updatePizza(@PathVariable Long id, @ModelAttribute PizzaDTO pizzaDTO, @RequestPart MultipartFile image) throws IOException {
+    public ResponseEntity<Pizza> updatePizza(@PathVariable Long id, @ModelAttribute PizzaDTO pizzaDTO, @RequestPart(required = false) MultipartFile image) throws IOException {
         return ResponseEntity.ok(pizzaService.update(id, pizzaDTO, image));
     }
 
