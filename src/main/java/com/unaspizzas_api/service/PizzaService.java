@@ -47,13 +47,16 @@ public class PizzaService {
 
     public Pizza update(Long id, PizzaDTO pizzaDTO, MultipartFile image) throws IOException {
         Pizza pizza = findById(id);
-        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
 
         pizza.setName(pizzaDTO.getName());
         pizza.setDescription(pizzaDTO.getDescription());
         pizza.setPrice(pizzaDTO.getPrice());
-        pizza.setImage(imageBase64);
         pizza.setCategory(categoryStringToPizzaCategory(pizzaDTO.getCategory()));
+
+        if (image != null) {
+            String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
+            pizza.setImage(imageBase64);
+        }
 
         return pizzaRepository.save(pizza);
     }
