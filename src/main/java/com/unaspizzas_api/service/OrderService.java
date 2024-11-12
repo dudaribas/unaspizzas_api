@@ -35,6 +35,10 @@ public class OrderService {
         return orderRepository.findAllByUserIdUser(idUser);
     }
 
+    public Order findById(Long id) {
+        return orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
     private Order orderDTOToEntity(OrderDTO orderDTO) {
         return mapper.convertValue(orderDTO, Order.class);
     }
