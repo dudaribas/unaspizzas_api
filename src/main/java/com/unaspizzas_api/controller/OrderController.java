@@ -40,6 +40,11 @@ public class OrderController {
         return new ResponseEntity<>(orderService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/{idOrder}")
+    public ResponseEntity<Order> getById(@PathVariable Long idOrder) {
+        return ResponseEntity.ok(orderService.findById(idOrder));
+    }
+
     @PutMapping("/{id}/status")
     public ResponseEntity<Order> updateStatus(@PathVariable Long id, @RequestBody StatusOrder statusOrder) {
         return new ResponseEntity<>(orderService.updateStatus(id, statusOrder), HttpStatus.OK);
