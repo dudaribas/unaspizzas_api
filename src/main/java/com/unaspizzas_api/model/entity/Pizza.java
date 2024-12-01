@@ -26,6 +26,7 @@ public class Pizza {
     private PizzaCategory category;
 
     @Lob
+    @Column(name = "image", columnDefinition = "TEXT")
     private String image;
 
 }

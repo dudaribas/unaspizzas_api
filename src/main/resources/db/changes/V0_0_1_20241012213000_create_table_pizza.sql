@@ -2,7 +2,7 @@
 
 --changeset gustavotaima:1
 CREATE TABLE pizza_category (
-    id_pizza_category INT AUTO_INCREMENT,
+    id_pizza_category SERIAL,
     name_pizza_category VARCHAR(100) NOT NULL,
 
     CONSTRAINT pk_pizza_category
@@ -21,12 +21,12 @@ INSERT INTO pizza_category (name_pizza_category) VALUES
 
 --changeset gustavotaima:3
 CREATE TABLE pizza (
-    id_pizza INT AUTO_INCREMENT,
+    id_pizza SERIAL,
     id_pizza_category INT NOT NULL,
     name VARCHAR(100) NOT NULL,
     description VARCHAR(200) NOT NULL,
-    image LONGTEXT NOT NULL,
-    price FLOAT NOT NULL,
+    image TEXT NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
 
     CONSTRAINT pk_pizza
         PRIMARY KEY (id_pizza),

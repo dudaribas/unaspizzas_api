@@ -2,7 +2,7 @@
 
 --changeset gustavotaima:1
 CREATE TABLE status_order (
-    id_status_order INT AUTO_INCREMENT,
+    id_status_order SERIAL,
     name_status VARCHAR(100) NOT NULL,
 
     CONSTRAINT pk_status_order
@@ -15,18 +15,18 @@ CREATE TABLE status_order (
 INSERT INTO status_order (name_status) VALUES
     ('Pendente'),
     ('Preparando'),
-    ('Pronto'),
-    ('Entregue');
+    ('Aguardando entrega'),
+    ('Em rota de entrega'),
+    ('Finalizado');
 
---rollback delete status_order;
+--rollback delete from status_order;
 
 --changeset gustavotaima:3
 CREATE TABLE order_app (
-    id_order INT AUTO_INCREMENT,
+    id_order SERIAL,
     id_user INT,
     id_status_order INT,
-    total_price DECIMAL(10, 2) NOT NULL,
-
+    total_price NUMERIC(10, 2) NOT NULL,
     created_at DATE NOT NULL,
     updated_at DATE,
 

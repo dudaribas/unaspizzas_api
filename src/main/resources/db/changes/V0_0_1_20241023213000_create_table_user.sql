@@ -2,7 +2,7 @@
 
 --changeset felipecosta:1
 CREATE TABLE users (
-    id_user INT AUTO_INCREMENT,
+    id_user SERIAL,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     address VARCHAR(200) NOT NULL,
