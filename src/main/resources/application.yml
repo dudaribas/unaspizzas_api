@@ -2,13 +2,20 @@ spring:
   application:
     name: UnasPizzas
   datasource:
-    url: jdbc:mysql://localhost:3306/db_unaspizzas
-    username: root
-    password: root
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
   jpa:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     change-log: classpath:db/db.changelog-master.yml
+    test-rollback-on-update: false
+
+frontend:
+  url: ${FRONTEND_URL}
